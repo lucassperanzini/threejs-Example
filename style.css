@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+    box-sizing: border-box;
+}
+
+#title {
+    position: absolute;
+    top:45%;  /* Ajuste a distância do topo */
+    left: 50%;
+    transform: translateX(-50%);  /* Centralizar horizontalmente */
+    color: white;
+    font-size: 3em;
+    text-align: center;  /* Centralizar texto */
+}
