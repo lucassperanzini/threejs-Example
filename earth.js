@@ -15,7 +15,7 @@ import getStarfield from "./src/getStarfield.js";
 const w = window.innerWidth
 const h = window.innerHeight
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 10);
+const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 60);
 camera.position.z = 3;
 
 // render
@@ -32,8 +32,8 @@ controls.dampingFactor = 0.05;
 
 
 const earthGroup = new THREE.Group();
-earthGroup.rotation.z = -23.4 * Math.PI /180
- scene.add(earthGroup)
+earthGroup.rotation.z = -23.4 * Math.PI / 180
+scene.add(earthGroup)
 
 const detail = 12
 const loader = new THREE.TextureLoader();
@@ -42,13 +42,13 @@ const loader = new THREE.TextureLoader();
 const geometry = new THREE.IcosahedronGeometry(1, detail); // Create a cube geometry
 const material = new THREE.MeshPhongMaterial({
 
-    
+
     map: loader.load("./textures/00_earthmap1k.jpg"),
     specularMap: loader.load("./textures/earthspec1k.jpg"),
     bumpMap: loader.load("./textures/earthbump1k.jpg"),
     bumpScale: 0.04,
     // mostra vertices e edges do objeto
-    
+
 })
 
 // a mesh e o tipo de eobjeto mais seu material 
@@ -58,13 +58,13 @@ earthGroup.add(earth);
 const lightMaterial = new THREE.MeshBasicMaterial({
     map: loader.load("./textures/03_earthlights1k.jpg"),
     blending: THREE.AdditiveBlending
-   
-    
+
+
 })
-const lightMesh = new THREE.Mesh(geometry,lightMaterial)
+const lightMesh = new THREE.Mesh(geometry, lightMaterial)
 earthGroup.add(lightMesh)
 
-const stars = getStarfield({numStars: 2000});
+const stars = getStarfield({ numStars: 2000 });
 scene.add(stars);
 
 
@@ -74,7 +74,7 @@ scene.add(stars);
 //     opacity: 0.9,
 //     blending: THREE.NormalBlending,
 //     alphaMap: loader.load('./textures/earthcloudmaptrans.jpg'),
-   
+
 
 // })
 
@@ -85,48 +85,52 @@ scene.add(stars);
 
 
 const fresnelMat = getFresnelMat();
-const glowMesh =  new THREE.Mesh(geometry,fresnelMat)
+const glowMesh = new THREE.Mesh(geometry, fresnelMat)
 glowMesh.scale.setScalar(1.01)
 earthGroup.add(glowMesh)
 
 
 
 // tipo de iluminacao
-const directionalLight = new THREE.DirectionalLight( 0xffffff,1.4);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.4);
 directionalLight.position.set(-2, 0.5, 1.5)
-scene.add( directionalLight );
+scene.add(directionalLight);
 // funcao para animar a cena
+
+// Move camera along the X-axis by 2 units
 
 
 const circulo = document.querySelector(".meu_circulo")
 const texto = document.querySelector("#texto_earth")
 
-circulo.addEventListener("click" , () =>{
+circulo.addEventListener("click", (e) => {
 
+    console.log(e)
+    if (texto.style.display === "none") {
+        texto.style.display = "block";
+    } else {
 
-    if( texto.style.display =="block"){
-        texto.style.display=="none"
-    }else{
-
-        texto.style.display = "block"
+        texto.style.display = "none";
     }
-
-
 
 
 
 })
 function animate() {
+    // camera.position.x += 0.1;
+    // // Rotate camera on the Y-axis by PI/4 radians (45 degrees)
+    // camera.rotation.y += Math.PI / 4;
+
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 
     //udpate por frame do control
     controls.update();
-    earth.rotation.y += 0.0005;
-    lightMesh.rotation.y += 0.0005
-    glowMesh.rotation.y +=0.0005
+    earth.rotation.y += 0.0008;
+    lightMesh.rotation.y += 0.0008
+    glowMesh.rotation.y += 0.0008
     // cloudMesh.rotation.y += 0.0008
-    
+
 
 }
 
