@@ -1,16 +1,73 @@
 *{
     margin: 0;
     padding: 0;
-    
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-sizing: border-box;
+    color: white;
 }
 
-#title {
+
+#container{
+    width: 35%;
     position: absolute;
-    top:45%;  /* Ajuste a distância do topo */
-    left: 50%;
-    transform: translateX(-50%);  /* Centralizar horizontalmente */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top:30%;  /* Ajuste a distância do topo */
+    left: 5%;
+}
+
+#container h1 {
     color: white;
-    font-size: 3em;
+    font-size: 8em;
     text-align: center;  /* Centralizar texto */
+}
+
+#container h2{
+    font-size: 4em;
+}
+
+.meu_circulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    transition: background-color 0.4s ease-in-out; 
+}
+#container p{
+    margin-top: 0.2em;
+    font-size: 1.3em;
+    word-wrap: break-word; 
+    
+    overflow: auto;
+    display: none;
+
+    animation: aparecer 2s ease-in-out forwards;
+}
+
+
+
+@keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: translateY(20px); /* Desloca o texto para cima */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+.meu_circulo:hover{
+    border: none;
+    background-color: white;
+    h2{
+        color: black;
+    }
 }

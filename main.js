@@ -96,6 +96,9 @@ scene.add(mesh);
 scene.add(hemiLight)
 
 
+
+
+
 // funcao para animar a cena
 function animate() {
     renderer.render(scene, camera);
